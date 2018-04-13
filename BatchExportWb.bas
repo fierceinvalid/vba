@@ -22,7 +22,7 @@ Sub BatchExportWbStart()
     sDocType = LTrim(RTrim(Split(Range("C1").Value, "-")(1)))
 
     
-            sDirPath = "put your file path here)
+            sDirPath = "put your file path here"
     strPath = sDirPath & sDocType
     
 
