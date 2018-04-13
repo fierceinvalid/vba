@@ -12,7 +12,7 @@ Sub BatchExportWbStart()
     Dim strPath As String
     Dim fso
     Dim fld
-    Dim sFilePath
+
 
     Set fso = CreateObject("Scripting.FileSystemObject")
     Set fld = fso.GetFolder(ActiveWorkbook.Path)
@@ -20,14 +20,14 @@ Sub BatchExportWbStart()
 
 
     sDocType = LTrim(RTrim(Split(Range("C1").Value, "-")(1)))
-    sFilePath = "put your file path here"
+
     
-    sDirPath = sFilePath
-    strPath = sDirPath & "\" & sDocType
+            sDirPath = "put your file path here)
+    strPath = sDirPath & sDocType
     
 
-    If Dir(sFilePath + sDocType, vbDirectory) = "" Then
-        MkDir Path:=sFilePath + sDocType
+    If Dir(sDirPath + sDocType, vbDirectory) = "" Then
+        MkDir Path:=sDirPath + sDocType
       '  MsgBox "Made A New Folder In GL Reconciliation"
      End If
         
