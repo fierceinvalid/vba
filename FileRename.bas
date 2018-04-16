@@ -97,7 +97,7 @@ Dim lasDigit As String
         Set regex2 = CreateObject("VBScript.RegExp")
  
             With regex2
-                .Pattern = "^\d{4}\w"
+                .Pattern = "^\d{4}\s"
                 .Global = True
             End With
             
@@ -128,7 +128,7 @@ Dim lasDigit As String
         
            strName = strYearDM + " " + spltFilename
         g = Replace(f, xString2, strName)
-        strFile = g & ".pdf"
+        strFile = g
         myFile = strPath & strFile
         OldFile = f
         NewFile = strFile
@@ -149,7 +149,7 @@ Dim lasDigit As String
         Set regex3 = CreateObject("VBScript.RegExp")
  
             With regex3
-                .Pattern = "^\d{4}-"
+                .Pattern = "^\d{4}\w"
                 .Global = True
             End With
             
