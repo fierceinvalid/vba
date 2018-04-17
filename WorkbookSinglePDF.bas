@@ -157,6 +157,10 @@ WS_Count = wbA.Worksheets.Count
     'create default name for savng file
     strFile = strNameNew & ".pdf"
     myFile = strPath & strFile
+  
+   For Each wsA In wbA.Worksheets
+        wsA.PageSetup.Orientation = xlLandscape
+    Next
 
     Debug.Print myFile
 
