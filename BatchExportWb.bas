@@ -12,6 +12,8 @@ Sub BatchExportWbStart()
     Dim strPath As String
     Dim fso
     Dim fld
+    Dim wsA     As Worksheet
+    Dim wbA     As Workbook
 
 
     Set fso = CreateObject("Scripting.FileSystemObject")
