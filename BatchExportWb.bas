@@ -20,7 +20,10 @@ Sub BatchExportWbStart()
 
 
     sDocType = LTrim(RTrim(Split(Range("C1").Value, "-")(1)))
-
+    
+    Application.DisplayAlerts = False
+    ActiveWorkbook.Save
+    Application.DisplayAlerts = True
     
             sDirPath = "put your file path here"
     strPath = sDirPath & sDocType
@@ -38,7 +41,8 @@ Sub BatchExportWbStart()
     strPath = strPath & "\"
             
                 'need to save the active workbook before running loop
-    ActiveWorkbook.Saved = True
+    
+            
   
     '----Output directory---
     outputFolder = strPath
@@ -52,6 +56,7 @@ Sub BatchExportWbStart()
     Do Until fileName = vbNullString
         Set wbook = app.Workbooks.Open(folder & "\" & fileName)
         PrintWBToPDF wbook, outputFolder & GetFileFromPath(fileName)
+        'May not need this
         DoEvents
         wbook.Close SaveChanges:=False
         fileName = Dir()
