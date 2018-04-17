@@ -55,6 +55,25 @@ Sub BatchExportWbStart()
     fileName = Dir(folder & "\")
     Do Until fileName = vbNullString
         Set wbook = app.Workbooks.Open(folder & "\" & fileName)
+        
+          Application.PrintCommunication = False
+          For Each wsA In wb.Worksheets
+              With wsA.PageSetup
+                    .PrintArea = ""
+                    .Orientation = xlLandscape
+                    .Zoom = False
+                    '.PrintArea = Worksheets(ReportWsName).UsedRange
+                    .FitToPagesWide = 1
+                    .FitToPagesTall = False
+                End With
+            Next wsA
+            Application.PrintCommunication = True
+           
+        PrintWBToPDF wb, outputFolder & GetFileFromPath(Filename)
+        
+        
+        wb.Close SaveChanges:=False
+        Filename = Dir()
         PrintWBToPDF wbook, outputFolder & GetFileFromPath(fileName)
         'May not need this
         DoEvents
