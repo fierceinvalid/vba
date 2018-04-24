@@ -59,7 +59,7 @@ WS_Count = wbA.Worksheets.Count
     sDateFinal = Replace(sDate, "/", ".")
     sNumberFinal = Replace(sNumber, ".", "")
     
-    sDirPath = "put your file path here"
+  sDirPath = "file path"
     strPath = sDirPath & sDocType
     
 
@@ -106,33 +106,6 @@ WS_Count = wbA.Worksheets.Count
         spltYearNew = spltYear
     End If
     
-    '------Find Latest Date in Month------
-'    If spltMonthNew = "01" Then
-'        spltDayEnd = "31"
-'    ElseIf spltMonthNew = "02" Then
-'        spltDayEnd = "28"
-'    ElseIf spltMonthNew = "03" Then
-'        spltDayEnd = "31"
-'    ElseIf spltMonthNew = "04" Then
-'        spltDayEnd = "30"
-'     ElseIf spltMonthNew = "05" Then
-'        spltDayEnd = "31"
-'     ElseIf spltMonthNew = "06" Then
-'        spltDayEnd = "30"
-'     ElseIf spltMonthNew = "07" Then
-'        spltDayEnd = "31"
-'     ElseIf spltMonthNew = "08" Then
-'        spltDayEnd = "31"
-'     ElseIf spltMonthNew = "09" Then
-'        spltDayEnd = "30"
-'     ElseIf spltMonthNew = "10" Then
-'        spltDayEnd = "31"
-'     ElseIf spltMonthNew = "11" Then
-'        spltDayEnd = "30"
-'     ElseIf spltMonthNew = "12" Then
-'        spltDayEnd = "31"
-'    End If
-    
     
     If Len(sNumberFinal) > 10 Then
         sNumberFinal = "MULTIPLE"
@@ -157,16 +130,25 @@ WS_Count = wbA.Worksheets.Count
     'create default name for savng file
     strFile = strNameNew & ".pdf"
     myFile = strPath & strFile
-  
-   For Each wsA In wbA.Worksheets
-        wsA.PageSetup.Orientation = xlLandscape
-    Next
+    
+     Application.PrintCommunication = False
+            For Each wsA In wbA.Worksheets
+                With wsA.PageSetup
+                    .PrintArea = ""
+                    .Orientation = xlLandscape
+                    .Zoom = False
+                    .FitToPagesWide = 1
+                    .FitToPagesTall = False
+                End With
+            Next wsA
+    Application.PrintCommunication = True
+
 
     Debug.Print myFile
 
     'export to PDF if a folder was selected
         If myFile <> "False" Then
-        ActiveWorkbook.ExportAsFixedFormat _
+        wbA.ExportAsFixedFormat _
                 Type:=xlTypePDF, _
                 fileName:=myFile, _
                 Quality:=xlQualityStandard, _
