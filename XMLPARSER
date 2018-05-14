@@ -1,0 +1,14 @@
+Sub FinalXML()
+
+    Dim xmlDoc As MSXML2.DOMDocument60
+    Set xmlDoc = New MSXML2.DOMDocument60
+    
+    xmlDoc.SetProperty "SelectionNamespaces", "xmlns:my='http://schemas.microsoft.com/office/infopath/2003/myXSD/2013-01-04T19:19:54'"
+    xmlDoc.async = False
+    xmlDoc.Load "\\prshsan02\apps\Apps\Eforms\Deposit Services\Correspondence\Test\sample.xml"
+
+    Debug.Print xmlDoc.SelectSingleNode("/my:myFields/my:XXXXXX").text
+    Debug.Print xmlDoc.SelectSingleNode("/my:myFields/my:XXXXXXXXX").text
+
+
+End Sub
