@@ -29,6 +29,9 @@ Dim spltNew As String
 Dim OldFile As String
 Dim NewFile As String
 Dim lasDigit As String
+Dim i As Byte
+Dim dump As VbMsgBoxResult
+Dim answer As Integer
 
     Dim objFSO As Object
     Set objFSO = CreateObject("Scripting.FileSystemObject")
@@ -43,11 +46,16 @@ Dim lasDigit As String
     Dim colFiles As Collection
     Set colFiles = New Collection
 
-                RecursiveFileSearch "", objRegExp, colFiles, objFSO
+                RecursiveFileSearch "Put File Path Here", objRegExp, colFiles, objFSO
 
     For Each f In colFiles
     'Debug.Print (f)
         'Insert code here to do something with the matched files
+        
+        
+        
+ '---Match and change all files in format: YYYY-.M-.DD   ----
+        
         
         Dim regex As Object, str As String
         Set regex = CreateObject("VBScript.RegExp")
@@ -75,16 +83,23 @@ Dim lasDigit As String
         spltFilename = Mid(xString, 2 + Len(xString) - InStr(StrReverse(xString), lasDigit))
  
         
-        strName = spltYear + "." + "0" + spltMonth + "." + spltDay + Mid(xString, 10)
+        strName = spltYear + "." + "0" + spltMonth + "." + spltDay + "" + Mid(xString, 10)
         g = Replace(f, xString, strName)
+     '   strFile = g & ".pdf"
         strFile = g
         myFile = strPath & strFile
         OldFile = f
         NewFile = strFile
         
     
-        
-       Name OldFile As NewFile
+        answer = MsgBox("CHANGE FILE NAME OF:" & vbNewLine & vbNewLine & xString & vbNewLine & vbNewLine & "TO:" & vbNewLine & vbNewLine & strName, vbYesNo + vbQuestion, "Empty Sheet")
+            If answer = vbYes Then
+                Name OldFile As NewFile
+            Else
+                'do nothing
+            End If
+              
+        '   Name OldFile As NewFile
         
         Debug.Print g
     
@@ -93,12 +108,127 @@ Dim lasDigit As String
         Next Match
         
 
+
+
+
+ '---Match and change all files in format: YYYY-.MM-.D(Space)   ----
         
+        
+        Dim regex4 As Object, str4 As String
+        Set regex4 = CreateObject("VBScript.RegExp")
+ 
+            With regex4
+                .Pattern = "^\d{4}(\.|-)\d{2}(\.|-)\d{1}\s"
+                .Global = True
+            End With
+     
+
+        xString = Mid(f, 2 + Len(f) - InStr(StrReverse(f), "\"))
+        
+        Set matches = regex4.Execute(xString)
+        For Each Match In matches
+        
+        spltSpace = Left(xString, 9)
+        lasDigit = Mid(spltSpace, 1)
+        
+         
+        sDateFinal = Replace(spltSpace, "-", ".")
+        spltYear = Split(sDateFinal, ".")(0)
+        spltMonth = Split(sDateFinal, ".")(1)
+        spltDay = Split(sDateFinal, ".")(2)
+        
+        spltFilename = Mid(xString, 2 + Len(xString) - InStr(StrReverse(xString), lasDigit))
+ 
+        
+        strName = spltYear + "." + spltMonth + "." + "0" + spltDay + " " + Mid(xString, 10)
+        g = Replace(f, xString, strName)
+     '   strFile = g & ".pdf"
+        strFile = g
+        myFile = strPath & strFile
+        OldFile = f
+        NewFile = strFile
+        
+  
+        answer = MsgBox("CHANGE FILE NAME OF:" & vbNewLine & vbNewLine & xString & vbNewLine & vbNewLine & "TO:" & vbNewLine & vbNewLine & strName, vbYesNo + vbQuestion, "Empty Sheet")
+            If answer = vbYes Then
+                Name OldFile As NewFile
+            Else
+                'do nothing
+            End If
+              
+        '   Name OldFile As NewFile
+        
+        Debug.Print g
+    
+        
+
+        Next Match
+        
+        
+        
+        
+         '---Match and change all files in format: YYYY-.M-.D(Space)   ----
+        
+        
+        Dim regex5 As Object, str5 As String
+        Set regex5 = CreateObject("VBScript.RegExp")
+ 
+            With regex5
+                .Pattern = "^\d{4}(\.|-)\d{1}(\.|-)\d{1}\s"
+                .Global = True
+            End With
+     
+
+        xString = Mid(f, 2 + Len(f) - InStr(StrReverse(f), "\"))
+        
+        Set matches = regex5.Execute(xString)
+        For Each Match In matches
+        
+        spltSpace = Left(xString, 8)
+        lasDigit = Mid(spltSpace, 1)
+        
+         
+        sDateFinal = Replace(spltSpace, "-", ".")
+        spltYear = Split(sDateFinal, ".")(0)
+        spltMonth = Split(sDateFinal, ".")(1)
+        spltDay = Split(sDateFinal, ".")(2)
+        
+        spltFilename = Mid(xString, 2 + Len(xString) - InStr(StrReverse(xString), lasDigit))
+ 
+        
+        strName = spltYear + "." + "0" + spltMonth + "." + "0" + spltDay + " " + Mid(xString, 9)
+        g = Replace(f, xString, strName)
+        strFile = g
+        'strFile = g & ".pdf"
+        myFile = strPath & strFile
+        OldFile = f
+        NewFile = strFile
+        
+   
+        answer = MsgBox("CHANGE FILE NAME OF:" & vbNewLine & vbNewLine & xString & vbNewLine & vbNewLine & "TO:" & vbNewLine & vbNewLine & strName, vbYesNo + vbQuestion, "Empty Sheet")
+            If answer = vbYes Then
+                Name OldFile As NewFile
+            Else
+                'do nothing
+            End If
+              
+        '   Name OldFile As NewFile
+        
+        Debug.Print g
+    
+        
+
+        Next Match
+        
+        
+   '---Match and change all files in format: YYYY   ----
+   
+   
         Dim regex2 As Object, str2 As String
         Set regex2 = CreateObject("VBScript.RegExp")
  
             With regex2
-                .Pattern = "^\d{4}(\.|-)\d{2}(\.|-)\d{1}(\s|-|\.)"
+                .Pattern = "^\d{4}\s"
                 .Global = True
             End With
             
@@ -110,34 +240,99 @@ Dim lasDigit As String
         Set matches = regex2.Execute(xString2)
         For Each Match In matches
         
-        spltSpace = Left(xString2, 9)
-        lasDigit = Mid(spltSpace, 1)
+        
+        
+        
+        spltSpace = Left(xString2, 4)
+        spltFilename = Right(xString2, Len(xString2) - Len(spltSpace))
+        'spltFilename = Split(xString2, "8", 2)(1)
+        
         
          
-        sDateFinal = Replace(spltSpace, "-", ".")
-        spltYear = Split(sDateFinal, ".")(0)
-        spltMonth = Split(sDateFinal, ".")(1)
-        spltDay = Split(sDateFinal, ".")(2)
         
-        spltFilename = Mid(xString2, 2 + Len(xString2) - InStr(StrReverse(xString2), lasDigit))
- 
+        strYearDM = spltSpace + ".12." + "31"
         
-        strName = spltYear + "." + spltMonth + "." + "0" + spltDay + Mid(xString2, 10)
+        'h = Replace(f, strYearDM, xString2)
+        
+        'Debug.Print Match.Value
+        'Debug.Print strYearDM
+        
+           strName = strYearDM + "" + spltFilename
         g = Replace(f, xString2, strName)
         strFile = g
         myFile = strPath & strFile
         OldFile = f
         NewFile = strFile
-       
-'       If NewFile = OldFile Then
-'            Name OldFile As NewFile + (1)
-'        Else
-'            Name OldFile As NewFile
-'        End If
-'
-       
         
-        Name OldFile As NewFile
+      
+        answer = MsgBox("CHANGE FILE NAME OF:" & vbNewLine & vbNewLine & xString & vbNewLine & vbNewLine & "TO:" & vbNewLine & vbNewLine & strName, vbYesNo + vbQuestion, "Empty Sheet")
+            If answer = vbYes Then
+                Name OldFile As NewFile
+            Else
+                'do nothing
+            End If
+              
+        '   Name OldFile As NewFile
+        
+        Debug.Print g
+        
+
+        Next Match
+        
+        
+         '---Match and change all files in format: YYYY   ----
+   
+   
+        Dim regex6 As Object, str6 As String
+        Set regex6 = CreateObject("VBScript.RegExp")
+ 
+            With regex6
+                .Pattern = "^\d{4}\w"
+                .Global = True
+            End With
+            
+                
+
+        xString2 = Mid(f, 2 + Len(f) - InStr(StrReverse(f), "\"))
+        
+        
+        Set matches = regex2.Execute(xString2)
+        For Each Match In matches
+        
+        
+        
+        
+        spltSpace = Left(xString2, 4)
+        spltFilename = Right(xString2, Len(xString2) - Len(spltSpace))
+        'spltFilename = Split(xString2, "8", 2)(1)
+        
+        
+         
+        
+        strYearDM = spltSpace + ".12." + "31"
+        
+        'h = Replace(f, strYearDM, xString2)
+        
+        'Debug.Print Match.Value
+        'Debug.Print strYearDM
+        
+           strName = strYearDM + " " + spltFilename
+        g = Replace(f, xString2, strName)
+        strFile = g
+        'strFile = g & ".pdf"
+        myFile = strPath & strFile
+        OldFile = f
+        NewFile = strFile
+        
+     
+        answer = MsgBox("CHANGE FILE NAME OF:" & vbNewLine & vbNewLine & xString & vbNewLine & vbNewLine & "TO:" & vbNewLine & vbNewLine & strName, vbYesNo + vbQuestion, "Empty Sheet")
+            If answer = vbYes Then
+                Name OldFile As NewFile
+            Else
+                'do nothing
+            End If
+              
+        '   Name OldFile As NewFile
         
         Debug.Print g
         
@@ -146,14 +341,14 @@ Dim lasDigit As String
         
         
         
-        
+  '---Match and change all files in format: YYYY(Letter)   ----
         
         
             Dim regex3 As Object, str3 As String
         Set regex3 = CreateObject("VBScript.RegExp")
  
             With regex3
-                .Pattern = "^\d{4}-"
+                .Pattern = "^\d{4}[A-Za-z]"
                 .Global = True
             End With
             
@@ -184,12 +379,21 @@ Dim lasDigit As String
         
            strName = strYearDM + " " + spltFilename
         g = Replace(f, xString3, strName)
-        strFile = g & ".pdf"
+        strFile = g
+        'strFile = g & ".pdf"
         myFile = strPath & strFile
         OldFile = f
         NewFile = strFile
         
-        Name OldFile As NewFile
+      
+        answer = MsgBox("CHANGE FILE NAME OF:" & vbNewLine & vbNewLine & xString & vbNewLine & vbNewLine & "TO:" & vbNewLine & vbNewLine & strName, vbYesNo + vbQuestion, "Empty Sheet")
+            If answer = vbYes Then
+                Name OldFile As NewFile
+            Else
+                'do nothing
+            End If
+              
+        '   Name OldFile As NewFile
         
         Debug.Print g
         
