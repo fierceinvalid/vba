@@ -68,7 +68,7 @@ Dim LastColumn As Long
 
     sDateFinal = Replace(sDate, "/", ".")
     sNumberFinal = Replace(sNumber, ".", "")
-    sDirPath = "\\prshsan02\apps\Apps\Eforms\Accounting\GL Reconciliation\"
+                sDirPath = "file path"
     strPath = sDirPath & sDocType
     
     '----Make Correct Folder in Directroy----
