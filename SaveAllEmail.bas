@@ -33,7 +33,7 @@ Set wrdDoc = wrdApp.Documents.Open(FileName:=tmpFileName, Visible:=True)
     Dim SpecialPath As String
     Dim strToSaveAs As String
     Set WshShell = CreateObject("WScript.Shell")
-    MyDocs = "\\prshsan02\apps\Apps\Eforms\Deposit Services\Correspondence\Duplicate Mobile Deposit"
+                                        MyDocs = "file path"
        
 strToSaveAs = MyDocs & "\" & sName & ".pdf"
  
