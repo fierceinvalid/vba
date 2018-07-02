@@ -43,7 +43,7 @@ Dim lasDigit As String
     Dim colFiles As Collection
     Set colFiles = New Collection
 
-    RecursiveFileSearch "Y:\Eforms\Commercial Loans\Backups\Testing Stuff\test\test\", objRegExp, colFiles, objFSO
+                RecursiveFileSearch "file path", objRegExp, colFiles, objFSO
 
     For Each f In colFiles
     'Debug.Print (f)
