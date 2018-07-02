@@ -60,7 +60,7 @@ result = BrowseForFolder("file path")
 '    Exit Sub
 '    End If
     
-'    sDir = "C:\Users\dbalk\Desktop\Work\Eforms\Commercial Loans"
+'    sDir = "file path"
 '    BrowseForFolder = sBrowsePath
     InitialPath = result + "\"
 '    InitialPath = sDir + "\" + sCommName + "\"
@@ -129,7 +129,7 @@ result = BrowseForFolder("file path")
     Next SubFolder
 
 
-InitialPath1 = "C:\Users\dbalk\Desktop\Work\Eforms\Commercial Loans\123456 Derek Industries\1 Details\"
+    InitialPath1 = "file path"
 
     Set FileSystem = CreateObject("Scripting.filesystemobject")
     Set Folder1 = FileSystem.GetFolder(InitialPath1)
