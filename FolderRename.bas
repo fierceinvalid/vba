@@ -21,7 +21,7 @@ Dim sBrowsePath As String
 Dim result As String
 
     '~~> Specify your start folder here
-    result = BrowseForFolder("C:\Users\dbalk\Desktop\Work\Eforms\Commercial Loans")
+result = BrowseForFolder("file path")
     Select Case result
         Case Is = False
             result = "an invalid folder!"
@@ -151,7 +151,7 @@ InitialPath1 = "C:\Users\dbalk\Desktop\Work\Eforms\Commercial Loans\123456 Derek
     
     
     
-    InitialPath1 = "C:\Users\dbalk\Desktop\Work\Eforms\Commercial Loans\123456 Derek Industries\2 Documentation\"
+        InitialPath1 = "FIle Path"
 
     Set FileSystem = CreateObject("Scripting.filesystemobject")
     Set Folder1 = FileSystem.GetFolder(InitialPath1)
