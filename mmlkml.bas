@@ -94,7 +94,7 @@ Set wrdDoc = wrdApp.Documents.Open(Filename:=tmpFileName, Visible:=True)
     Dim strToSaveAs As String
     Set WshShell = CreateObject("WScript.Shell")
 '    MyDocs = WshShell.SpecialFolders(16)
-    MyDocs = "C:\Users\dbalk\Desktop\Work\Eforms\Payment Systems\Debit Fraud Disputes"
+                                             MyDocs = "file path"
        
 strToSaveAs = MyDocs & "\" & sName & ".pdf"
  
