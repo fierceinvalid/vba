@@ -72,12 +72,12 @@ End If
     sDateFinal = Replace(sDate, "/", ".")
 '    sNumberFinal = Replace(sNumber, ".", "")
     
-    sDirPath = "C:\Users\dbalk\Desktop\Work\Eforms\Accounting\GL Reconciliation"
+                sDirPath = "file path"
     strPath = sDirPath & "\" & sDocTypeName
     
 
-    If Dir("C:\Users\dbalk\Desktop\Work\Eforms\Accounting\GL Reconciliation\" + sDocTypeName, vbDirectory) = "" Then
-        MkDir Path:="C:\Users\dbalk\Desktop\Work\Eforms\Accounting\GL Reconciliation\" + sDocTypeName
+                If Dir("file path" + sDocTypeName, vbDirectory) = "" Then
+                    MkDir Path:="file path" + sDocTypeName
        ' MsgBox "Created A New Folder:" + " " + sDocType + " " + "in the GL Reconciliation"
      End If
         
