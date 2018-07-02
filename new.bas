@@ -170,7 +170,7 @@ var61 = "61 Escrow Analysis"
 var62 = "62 Misc Information"
 var63 = "63 Paid Loan File"
 
-sCommPath = "C:\Users\dbalk\Desktop\Work\Eforms\Commercial Loans\"
+    sCommPath = "file path"
 
     '~~> Specify your start folder here
     result = BrowseForFolder("C:\Users\dbalk\Desktop\Work\Eforms\Commercial Loans\")
