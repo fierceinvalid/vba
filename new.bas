@@ -173,7 +173,7 @@ var63 = "63 Paid Loan File"
     sCommPath = "file path"
 
     '~~> Specify your start folder here
-    result = BrowseForFolder("C:\Users\dbalk\Desktop\Work\Eforms\Commercial Loans\")
+    result = BrowseForFolder("file path")
     Select Case result
         Case Is = False
             result = "an invalid folder!"
