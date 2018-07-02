@@ -49,7 +49,7 @@ result = BrowseForFolder("file path")
 'Response = MsgBox(Msg, Style, Title)
 
 '    '~~> Specify your start folder here
-'    Ret = BrowseForFolder("C:\Users\dbalk\Desktop\Work\Eforms\Commercial Loans")
+'    Ret = BrowseForFolder("file path")
 '
 '    sCommName = Range("F2")
 '
